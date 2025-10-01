@@ -12,7 +12,7 @@ You will need:
 
 2. A moderately recent version of Node.js. (Tested with the current and previous LTS releases: v22 and v20.)
 
-3. A remotely recent version of Docker. Tested with the v20 engine.
+3. A remotely recent version of Docker. (Tested with the v20 engine.)
 
 All other external dependencies can installed automatically.
 
@@ -30,7 +30,7 @@ All other external dependencies can installed automatically.
 
 If you run into any issues with `make run` in step #3 above, you can try:
 
-  * `make clean install build run` to force the build sequence relying on make's dependency resolution magic
+  * `make clean install build run` to force the build sequence without relying on make's dependency resolution magic.
 
   * `make clean-more reinstall` - the "nuclear option", which wipes out all installed dependencies and lockfiles to force a clean install. (Follow this with either of the above.)
 
@@ -44,6 +44,4 @@ A [`Makefile`](./Makefile) is provided for your convenience, but you can also bu
 (docker compose up --build)
 ```
 
-You can also run the service directly on the host platform (without relying on `docker` or `docker compose`).
-
-See the scripts defined in [`./client/package.json`](./client/package.json) and [`./server/package.json`](./server/package.json) for details.
+You can run the service directly on the host platform (outside of the docker container without relying on `docker` or `docker compose`). See the scripts defined in [`./client/package.json`](./client/package.json) and [`./server/package.json`](./server/package.json) for details.

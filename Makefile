@@ -1,3 +1,7 @@
+# use `make start | stop | status | restart` for daemon-ish process management
+# see `make help` for more options
+
+
 ########################################################### CONFIG ##
 
 .DEFAULT_GOAL := help
@@ -5,7 +9,6 @@
 .PHONY: help install reinstall build run rerun start restart status logs stop clean clean-more
 PKG_FILES = client/package.json client/package-lock.json server/package.json server/package-lock.json
 DOCKER_CONTAINER_PREFIX = tiny-ai-tutor
-
 
 ############################################################# HELP ##
 
@@ -19,14 +22,13 @@ help: ## show this help message
 	@echo ""
 	@echo "  1. \033[36mcp .env.example .env\033[0m"
 	@echo "  2. Edit \033[36m.env\033[0m to set \033[36mOPENAI_KEY\033[0m."
-	@echo "  3. Run \033[36mmake run\033[0m to launch in foreground"
-	@echo "      or \033[36mmake start\033[0m to launch as daemon."
+	@echo "  3. Run \033[36mmake run\033[0m to launch in the foreground"
+	@echo "      or \033[36mmake start\033[0m to launch as a daemon."
 	@echo "      Both targets will automatically"
 	@echo "      install and build as needed."
 	@echo "  4. Visit \033[36;4mhttp://localhost:8080\033[0m"
 	@echo "     (or the HOST_PORT set in .env)."
 	@echo ""
-
 
 ########################################################## INSTALL ##
 
@@ -41,8 +43,6 @@ reinstall: # builds package-lock files if missing
 	cd client && rm -rf package-lock.json && npm install
 	cd server && rm -rf package-lock.json && npm install
 
-# **/package-lock.json: reinstall
-
 ############################################################ BUILD ##
 
 build: .installed ## generates docker images
@@ -55,10 +55,9 @@ run: build ## launch docker containers in foreground
 
 rerun: stop run # stop then run (fg)
 
-
 ########################################################### DAEMON ##
 
-start: build ## launch docker container as daemon (bg)
+start: build ## launch docker container as a daemon (bg)
 	docker compose up -d
 	@echo "\nVisit \033[36;4mhttp://localhost:8080\033[0m (or the HOST_PORT set in .env) to view\n"
 
@@ -67,9 +66,10 @@ restart: stop start ## stop then start (daemon)
 status: ## check if docker containers are up
 	@running=$$(docker ps --format "table {{.Names}}\t{{.Status}}" | grep $(DOCKER_CONTAINER_PREFIX)); \
 	if [ -n "$$running" ]; then \
-		docker ps --format "table {{.Names}}\t{{.Status}}" | grep $(DOCKER_CONTAINER_PREFIX); \
+		echo "$$running"; \
+		exit 0; \
 	else \
-		echo "No docker compose containers matching '$(DOCKER_CONTAINER_PREFIX)' are running."; \
+		echo "No docker containers matching '$(DOCKER_CONTAINER_PREFIX)' are running."; \
 		echo "Try 'make start' to launch. See 'make help' for more."; \
 		exit 1; \
 	fi
