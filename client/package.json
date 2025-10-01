@@ -15,8 +15,7 @@
     "rehype-katex": "^7.0.1",
     "rehype-sanitize": "^6.0.0",
     "remark-gfm": "^4.0.1",
-    "remark-math": "^6.0.0",
-    "uuid": "^13.0.0"
+    "remark-math": "^6.0.0"
   },
   "devDependencies": {
     "@types/node": "^24.6.1",
