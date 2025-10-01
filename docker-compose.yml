@@ -1,0 +1,26 @@
+services:
+  server:
+    build: ./server
+    environment:
+      OPENAI_KEY: ${OPENAI_KEY}
+      OPENAI_MODEL: ${OPENAI_MODEL}
+      SERVER_PORT: 3000
+    expose:
+      - 3000
+    healthcheck:
+      test: [ "CMD", "node", "-e", "require('http').get('http://localhost:3000', r=>process.exit(0)).on('error',()=>process.exit(1))" ]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+  client:
+    build: ./client
+    ports:
+      - "${HOST_PORT:-8080}:80"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:80 || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+    depends_on:
+      - server
+

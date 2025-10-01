@@ -1,0 +1,145 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+.app-cont {
+  max-width: 720px;
+  margin: 2rem auto;
+  font-family: system-ui;
+}
+
+.site-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom:1rem;
+  justify-content: flex-end;
+}
+
+.logo-img {
+  height: 42px;
+  width: 42px;
+}
+
+.chat-cont {
+  border: 1px solid #dddddd;
+  padding: 16px;
+  border-radius: 8px;
+  min-height: 260px;
+}
+
+.chat-msg {
+  margin: 0.75rem 0;
+}
+
+.chat-msg .msg-sender {
+  display: block;
+  font-weight: bold;
+  font-variant-caps: all-petite-caps;
+}
+
+.chat-msg.usr-sent {
+  margin-right: 2em;
+}
+
+.chat-msg.usr-sent .msg-sender {
+  text-align: left;
+}
+
+.chat-msg.usr-sent .msg-body {
+  margin-left: 0.5em;
+}
+
+.chat-msg.tut-sent {
+  margin-left: 2em;
+}
+
+.chat-msg.tut-sent .msg-sender {
+  text-align: right;
+}
+
+.chat-msg.tut-sent .msg-body {
+  margin-right: 0.5em;
+}
+
+.md-msg {
+  line-height: 1.45;
+  color: #333333;
+  font-size: 1rem;
+}
+
+.md-msg :where(p, ul, ol, pre, blockquote, table) {
+  margin: 0.5rem 0;
+}
+
+.md-msg :where(h1, h2, h3, h4, h5, h6) {
+  line-height: 1.2;
+  margin: 0.85rem 0 0.5rem;
+  font-weight: 600;
+}
+
+.md-msg ul, .md-msg ol {
+  padding-left: 1.25rem;
+}
+
+.md-msg li+li {
+  margin-top: 0.25rem;
+}
+
+.md-msg blockquote {
+  padding-left: 0.75rem;
+  border-left: 3px solid #e5e7eb;
+  color: #374151;
+  font-style: italic;
+}
+
+.md-msg tbp-wrap {
+  overflow-x: auto;
+}
+
+.md-msg table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.md-msg th, .md-msg td {
+  border: 1px solid #e5e7eb;
+  padding: 0.35rem 0.5rem;
+  text-align: left;
+}
+
+.md-msg .code-block {
+  background-color: #f6f8fa;
+  padding: 0.75rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: Consolas, "Liberation Mono", monospace;
+  font-size: 0.9rem;
+}
+
+.form-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.form-actions input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+}
+
+.form-actions button {
+  min-width: 3.4em;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-actions button:hover {
+  background-color: #0056b3;
+}

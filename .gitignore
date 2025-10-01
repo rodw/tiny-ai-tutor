@@ -1,0 +1,23 @@
+# dependencies
+.installed
+node_modules/
+
+# build artifacts
+.vite/
+*.tsbuildinfo
+coverage/
+dist/
+
+# env
+.env*
+!.env.example
+
+# docker
+Dockerfile.*
+docker-compose.override.yml
+
+# logs and junk
+.vscode/
+.DS_Store
+*.log
+npm-debug.log*

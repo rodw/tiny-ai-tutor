@@ -1,0 +1,23 @@
+{
+  "name": "tiny-ai-tutor-api",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "start": "node dist/server.js",
+    "build": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "envalid": "^8.1.0",
+    "express": "^4.19.2",
+    "openai": "^4.67.3"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.3"
+  }
+}
