@@ -10,30 +10,46 @@ export default function ChatInput({ sendMessage, isStreaming, stopStreaming }: C
   const [input, setInput] = useState("");
 
   return (
-    <form
-      className="form-actions"
-      onSubmit={e => {
-        e.preventDefault();
-        if (!input.trim() || isStreaming) {
-          return;
-        } else {
-          void sendMessage(input.trim());
-          setInput("");
-        }
-      }}
-    >
-      <input
-        value={input}
-        onChange={e => setInput(e.target.value)}
-        placeholder="What would you like to learn next?"
-        autoFocus={true}
-      />
-      <button type="submit" disabled={isStreaming || !input.trim()}>
-        Send
-      </button>
-      <button type="button" onClick={stopStreaming} disabled={!isStreaming}>
-        Stop
-      </button>
-    </form>
+    <>
+      <div className="actions">
+        <a
+          className={`print-link${isStreaming ? " disabled" : ""}`}
+          href="#"
+          onClick={e => {
+            e.preventDefault();
+            if (!isStreaming) window.print();
+          }}
+          aria-disabled={isStreaming}
+          tabIndex={isStreaming ? -1 : 0}
+        >
+          Print Transcript
+        </a>
+      </div>
+      <form
+        className="form-actions"
+        onSubmit={e => {
+          e.preventDefault();
+          if (!input.trim() || isStreaming) {
+            return;
+          } else {
+            void sendMessage(input.trim());
+            setInput("");
+          }
+        }}
+      >
+        <input
+          value={input}
+          onChange={e => setInput(e.target.value)}
+          placeholder="What would you like to learn next?"
+          autoFocus={true}
+        />
+        <button type="submit" disabled={isStreaming || !input.trim()}>
+          Send
+        </button>
+        <button type="button" onClick={stopStreaming} disabled={!isStreaming}>
+          Stop
+        </button>
+      </form>
+    </>
   );
 }
