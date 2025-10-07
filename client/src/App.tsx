@@ -6,6 +6,7 @@ import remarkMath from "remark-math";
 import ChatInput from "./ChatInput";
 import { useChat } from "./useChat";
 
+import "katex/dist/contrib/mhchem";
 import 'katex/dist/katex.min.css';
 import "./style.css";
 
@@ -19,8 +20,7 @@ export default function App() {
         <img className="logo-img" src="/logo-192.png" alt="Tiny AI Tutor"/>
       </div>
 
-
-      <div className="chat-cont">
+      <div className={`chat-cont${isStreaming ? " is-streaming" : ""}`}>
         {messages
           .filter(m => m.role != "system")
           .map((m) => (
@@ -62,6 +62,33 @@ export default function App() {
                             {children}
                           </a>
                         );
+                      },
+                      img({ src, alt }) {
+                        if (src && src.trim()) {
+                          return (
+                            <div className="md-img-wrap">
+                              <a
+                                className="ext-link md-img-src-link"
+                                href={src}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                <img className="md-img" src={src} alt=""/>
+                              </a>
+                              <a
+                                className="ext-link md-img-search-link"
+                                href={`https://duckduckgo.com/?q=${encodeURIComponent(src)}&iax=images&ia=images&safesearch=strict`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title={`Source: ${src}`}
+                              >
+                                [{alt || src}]
+                              </a>
+                            </div>
+                          );
+                        } else {
+                          return null;
+                        }
                       },
                     }}
                   >
