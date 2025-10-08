@@ -10,7 +10,7 @@ import { ChatGptMessageWithId } from "../types/ChatGptMessageWithId";
 
 import "katex/dist/contrib/mhchem";
 import 'katex/dist/katex.min.css';
-import './ChatMessages.css';
+import styles from './ChatMessages.module.css';
 
 interface ChatMessagesProps {
   /** current chat history */
@@ -21,17 +21,21 @@ interface ChatMessagesProps {
 
 export default function ChatMessages({ messages, isStreaming }: ChatMessagesProps) {
   return (
-    <div className={`chat-cont${isStreaming ? " is-streaming" : ""}`}>
+      <div className={[styles["chat-cont"], isStreaming ? styles["is-streaming"] : ""].join(" ")}>
       {messages
         .filter(m => m.role !== "system")
         .map((m) => (
           <div
             key={m.id}
-            className={`chat-msg md-msg ${m.role === "user" ? "usr-sent" : "tut-sent"}`}>
-            <span className="msg-sender">
+            className={[
+              styles["chat-msg"],
+              styles["md-msg"],
+              m.role === "user" ? styles["usr-sent"] : styles["tut-sent"]
+            ].join(" ")}>
+            <span className={styles["msg-sender"]}>
               {m.role === "user" ? "You" : "Tutor"}
             </span>
-            <div className="msg-body">
+            <div className={styles["msg-body"]}>
               {m.role === "assistant" ? (
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm, remarkMath]}
@@ -40,7 +44,7 @@ export default function ChatMessages({ messages, isStreaming }: ChatMessagesProp
                     code({ className, children }) {
                       if (className) {
                         return (
-                          <pre className={`code-block ${className}`}>
+                          <pre className={`${styles["code-block"]} ${className || ""}`}>
                             <code>{children}</code>
                           </pre>
                         );
@@ -50,14 +54,19 @@ export default function ChatMessages({ messages, isStreaming }: ChatMessagesProp
                     },
                     table({ children }) {
                       return (
-                        <div className="tbl-wrap">
+                        <div className={styles["tbl-wrap"]}>
                           <table>{children}</table>
                         </div>
                       );
                     },
                     a({ href, children }) {
                       return (
-                        <a href={href} target="_blank" rel="noopener noreferrer" className="ext-link">
+                        <a
+                          className={styles["ext-link"]}
+                          href={href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           {children}
                         </a>
                       );
@@ -65,17 +74,21 @@ export default function ChatMessages({ messages, isStreaming }: ChatMessagesProp
                     img({ src, alt }) {
                       if (src && src.trim()) {
                         return (
-                          <div className="md-img-wrap">
+                          <div className={styles["md-img-wrap"]}>
                             <a
-                              className="ext-link md-img-src-link"
+                              className={`${styles["ext-link"]} ${styles["md-img-src-link"]}`}
                               href={src}
                               target="_blank"
                               rel="noopener noreferrer"
                             >
-                              <img className="md-img" src={src} alt=""/>
+                              <img
+                                className={styles["md-img"]}
+                                src={src}
+                                alt=""
+                              />
                             </a>
                             <a
-                              className="ext-link md-img-search-link"
+                              className={`${styles["ext-link"]} ${styles["md-img-search-link"]}`}
                               href={`https://duckduckgo.com/?q=${encodeURIComponent(src)}&iax=images&ia=images&safesearch=strict`}
                               target="_blank"
                               rel="noopener noreferrer"
