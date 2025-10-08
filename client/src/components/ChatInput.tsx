@@ -4,8 +4,7 @@
 import { useState, useRef } from "react";
 import ExamplePrompts from "./ExamplePrompts";
 
-import "./ChatInput.css";
-
+import styles from "./ChatInput.module.css";
 
 interface ChatInputProps {
   /** post user message content to server */
@@ -23,9 +22,9 @@ export default function ChatInput({ sendMessage, isStreaming, stopStreaming }: C
 
   return (
     <>
-      <div className="actions no-print">
+      <div className={`${styles["actions"]} no-print`}>
         <a
-          className={`print-link${isStreaming ? " disabled" : ""}`}
+          className={isStreaming ? styles["disabled"] : ""}
           href="#"
           onClick={e => {
             e.preventDefault();
@@ -37,7 +36,6 @@ export default function ChatInput({ sendMessage, isStreaming, stopStreaming }: C
           Print Transcript
         </a>
         <a
-          className="example-prompts-link"
           href="#"
           onClick={e => {
             e.preventDefault();
@@ -55,7 +53,7 @@ export default function ChatInput({ sendMessage, isStreaming, stopStreaming }: C
         inputRef={inputRef}
       />
       <form
-        className="form-actions no-print"
+        className={`${styles["form-actions"]} no-print`}
         onSubmit={e => {
           e.preventDefault();
           if (!input.trim() || isStreaming) {
