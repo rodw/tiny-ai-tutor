@@ -5,7 +5,7 @@ import { useRef } from "react";
 import useScrollLock from "../hooks/useScrollLock";
 import useModalDismiss from "../hooks/useModalDismiss";
 
-import "./ExamplePrompts.css";
+import styles from "./ExamplePrompts.module.css";
 
 export const EXAMPLE_PROMPTS = [
   "Can you walk me through a practice problem using the Pythagorean theorem?",
@@ -41,26 +41,26 @@ export default function ExamplePrompts({isOpen, onClose, onSelect, inputRef, pro
     return null;
   } else {
     return (
-      <div className="eg-prompts-overlay no-print" role="dialog" aria-modal="true">
-        <div className="eg-prompts-menu no-print" ref={menuRef} tabIndex={-1}>
-          <div className="eg-prompts-header">
-            <div
-              className="eg-prompts-header-head"
-            >Example Prompts</div>
+      <div className={`${styles["eg-prompts-overlay"]} no-print`} role="dialog" aria-modal="true">
+        <div className={`${styles["eg-prompts-menu"]} no-print`} ref={menuRef} tabIndex={-1}>
+          <div className={styles["eg-prompts-header"]}>
+            <div className={styles["eg-prompts-header-head"]}>
+              Example Prompts
+            </div>
             <button
-              className="eg-prompts-close"
+              className={styles["eg-prompts-close"]}
               type="button"
               onClick={onClose}
               aria-label="Close example prompts menu"
             >×</button>
           </div>
-          <div className="eg-prompts-content">
+          <div className={styles["eg-prompts-content"]}>
             <ul>
               {prompts.map((prompt, idx) => (
                 <li key={idx}>
                   <a
                     href="#"
-                    className="eg-prompt-link"
+                    className={styles["eg-prompt-link"]}
                     tabIndex={0}
                     onClick={e => {
                       e.preventDefault();
@@ -76,12 +76,10 @@ export default function ExamplePrompts({isOpen, onClose, onSelect, inputRef, pro
               ))}
             </ul>
           </div>
-          <div className="eg-prompts-footer">
-            <div
-              className="eg-prompts-footer-note"
-            ></div>
+          <div className={styles["eg-prompts-footer"]}>
+            <div className={styles["eg-prompts-footer-note"]}></div>
             <button
-              className="eg-prompts-cancel"
+              className={styles["eg-prompts-cancel"]}
               type="button"
               onClick={onClose}
             >Cancel</button>
