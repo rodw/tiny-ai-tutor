@@ -109,3 +109,28 @@
   color: #0000ee
 }
 
+@media print {
+  .chat-cont {
+    border: none !important;
+    padding: 0 !important;
+  }
+
+  .md-msg .md-img-wrap {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .md-msg a[href]:after {
+    content: " <" attr(href) ">";
+    font-size: small;
+    word-break: break-all;
+  }
+
+  .md-msg a.md-img-search-link {
+    display: block;
+  }
+
+  .md-msg a.md-img-search-link[href]::after {
+    display: none;
+  }
+}

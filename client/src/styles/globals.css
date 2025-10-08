@@ -55,3 +55,9 @@ body.scroll-locked {
   overflow: hidden !important;
   overscroll-behavior: none !important;
 }
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
