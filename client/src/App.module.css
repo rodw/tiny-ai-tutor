@@ -14,3 +14,10 @@
   height: var(--logo-size);
   width: var(--logo-size);
 }
+
+@media print {
+  .app-cont {
+    max-width: none !important;
+    margin: 0 !important;
+  }
+}
