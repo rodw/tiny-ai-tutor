@@ -1,0 +1,69 @@
+.actions {
+  display: flex;
+  gap: calc(2 * var(--button-gap));
+  margin-top: calc(var(--button-margin-top) / 2);
+  margin-left: var(--input-pad);
+  position: relative;
+}
+
+.actions a {
+  font-size: var(--button-font-size);
+  color: var(--button-color-primary);
+  transition: color var(--transition-duration) var(--transition-function), opacity var(--transition-duration) var(--transition-function);
+  font-variant-caps: all-petite-caps;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.actions a:hover {
+  color: var(--button-color-hover);
+  text-decoration: underline;
+}
+
+.actions a.disabled,
+.actions a.disabled:hover {
+  pointer-events: none;
+  cursor: default;
+  color: var(--button-color-disabled);
+  opacity: var(--button-disabled-opacity);
+  text-decoration: none;
+}
+
+.form-actions {
+  display: flex;
+  gap: var(--button-gap);
+  margin-top: var(--button-margin-top);
+}
+
+.form-actions input {
+  flex: 1;
+  padding: var(--input-pad);
+  border: 1px solid var(--chat-border-color);
+  border-radius: var(--button-border-radius);
+  font-size: var(--button-font-size)
+}
+
+.form-actions button {
+  font-size: var(--button-font-size);
+  min-width: 3.4em;
+  background-color: var(--button-color-primary);
+  color: var(--button-color-primary-contrast);
+  border: none;
+  border-radius: var(--button-border-radius);
+  cursor: pointer;
+  transition: background-color var(--transition-duration) var(--transition-function), opacity var(--transition-duration) var(--transition-function);
+}
+
+.form-actions button:hover {
+  background-color: var(--button-color-hover);
+  color: var(--button-color-hover-contrast);
+}
+
+.form-actions button:disabled,
+.form-actions button:disabled:hover {
+  color: var(--button-color-disabled);
+  background-color:  var(--button-color-disabled-contrast);
+  opacity: var(--button-disabled-opacity);
+  cursor: default;
+  pointer-events: none;
+}

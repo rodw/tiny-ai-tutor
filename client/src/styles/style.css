@@ -1,0 +1,74 @@
+:root {
+  color-scheme: light;
+
+  --body-color-fg: #000000;
+  --body-color-bg: #ffffff;
+
+  --font-base-family: system-ui;
+  --font-base-size: 1rem;
+  --font-mono-family: Consolas, "Liberation Mono", monospace;
+  --font-mono-size: 0.9rem;
+
+  --logo-size: 42px;
+  --app-max-width: 720px;
+
+  --chat-border-color: #dddddd;
+  --chat-border-radius: 8px;
+  --chat-min-height: 260px;
+  --chat-msg-indent: 2rem;
+  --chat-msg-body-indent: 0.5rem;
+  --md-text-color: #333333;
+  --md-border-color: #e5e7eb;
+  --md-img-max-width: min(400px, 80%);
+
+  --button-color-primary: #0069d9;
+  --button-color-primary-contrast: #ffffff;
+  --button-color-hover: #0056b3;
+  --button-color-hover-contrast: #ffffff;
+  --button-color-disabled: #5d5d5d;
+  --button-color-disabled-contrast: #e9e9ed;
+  --button-color-accent: #ff4081;
+  --button-disabled-opacity: 0.8;
+  --button-border-radius: 4px;
+  --button-gap: 0.5rem;
+  --button-margin-top: 1rem;
+  --button-font-size: 1rem;
+  --input-pad: calc(0.75 * var(--button-font-size));
+
+  --transition-duration: 0.3s;
+  --transition-function: ease;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-base-family);
+  font-size: var(--font-base-size);
+  color: var(--body-color-fg);
+  background-color: var(--body-color-bg);
+  padding: 0 1rem;
+}
+
+body.scroll-locked {
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+}
+
+.app-cont {
+  max-width: var(--app-max-width);
+  margin: 0 auto;
+}
+
+.site-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  justify-content: flex-end;
+}
+
+.logo-img {
+  height: var(--logo-size);
+  width: var(--logo-size);
+}

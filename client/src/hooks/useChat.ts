@@ -1,26 +1,33 @@
+/*
+ * Handles various UI events / dataflows related to
+ * posting / rendering chatGPT messages.
+ */
 import { useCallback, useRef, useState } from "react";
+import { ChatGptMessageWithId, createMessage, stringifyMessages} from "../types/ChatGptMessageWithId";
 
 const TEXT_DECODER = new TextDecoder();
 const DATA_COLON = "data:";
 const FRAME_DELIM = "\n\n";
 
-interface ChatGptMessage {
-  id: string;
-  role: "user" | "assistant" | "system";
-  content: string;
+
+interface UseChatReturnType {
+  /** current chat history */
+  messages: ChatGptMessageWithId[];
+  /** mutate chat history */
+  sendMessage: (userText: string) => Promise<void>;
+  /** is currently reading reply from server */
+  isStreaming: boolean;
+  /** abort reading reply from server */
+  stopStreaming: () => void;
 }
 
-function createMessage(role: ChatGptMessage["role"], content: string, id?: string): ChatGptMessage {
-  return { id: id || crypto.randomUUID(), role, content };
-}
-
-export function useChat() {
-  const [messages, setMessages] = useState<ChatGptMessage[]>([]);
+export default function useChat(): UseChatReturnType {
+  const [messages, setMessages] = useState<ChatGptMessageWithId[]>([]);
   const [isStreaming, setIsStreaming] = useState(false);
   const abortRef = useRef<AbortController | null>(null);
 
   const sendMessage = useCallback(async (userText: string) => {
-    let newMsgs: ChatGptMessage[] = [];
+    let newMsgs: ChatGptMessageWithId[] = [];
     setMessages(prevMsgs => {
       newMsgs = [...prevMsgs, createMessage("user", userText)];
       return newMsgs;
@@ -32,9 +39,7 @@ export function useChat() {
 
     const resp = await fetch("/api/chat", {
       method: "POST",
-      body: JSON.stringify({
-        messages: newMsgs.map(({ role, content }) => ({ role, content }))
-      }),
+      body: stringifyMessages(newMsgs),
       headers: { "Content-Type": "application/json" },
       signal: abortRef.current.signal
     });
