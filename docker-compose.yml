@@ -5,6 +5,7 @@ services:
       OPENAI_KEY: ${OPENAI_KEY}
       OPENAI_MODEL: ${OPENAI_MODEL}
       SERVER_PORT: 3000
+      NODE_DEBUG: ${NODE_DEBUG:-}
     expose:
       - 3000
     healthcheck:

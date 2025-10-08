@@ -15,6 +15,7 @@ const envSpec = {
   OPENAI_KEY: envalid.str(),
   OPENAI_MODEL: envalid.str({default: "gpt-4o"}),
   SERVER_PORT: envalid.num({default: 3000}),
+  NODE_DEBUG: envalid.str({default: ""}),
 };
 
 function _loadDotEnv() {
