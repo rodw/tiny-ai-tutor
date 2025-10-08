@@ -28,7 +28,7 @@ interface ExamplePromptsProps {
   /** callback to invoke when a prompt is selected within the dialog menu */
   onSelect: (prompt: string) => void;
   /** the input field (scrolled into view on select) */
-  inputRef?: React.RefObject<HTMLInputElement>;
+  inputRef?: React.RefObject<HTMLInputElement>; // TODO should just move into onSelect handler
   /** the list of prompts to show in the menu */
   prompts?: string[];
 }
