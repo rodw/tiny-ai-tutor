@@ -1,6 +1,7 @@
 services:
   server:
     build: ./server
+    image: tiny-ai-tutor_server:latest
     environment:
       OPENAI_KEY: ${OPENAI_KEY}
       OPENAI_MODEL: ${OPENAI_MODEL}
@@ -15,6 +16,7 @@ services:
       retries: 10
   client:
     build: ./client
+    image: tiny-ai-tutor_client:latest
     ports:
       - "${HOST_PORT:-8080}:80"
     healthcheck:
