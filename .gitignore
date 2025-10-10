@@ -1,5 +1,6 @@
 # dependencies
 .installed
+.images-built
 node_modules/
 
 # build artifacts
